@@ -1,0 +1,6 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /springboot-web
+  tomcat:
+    max-threads: 3
