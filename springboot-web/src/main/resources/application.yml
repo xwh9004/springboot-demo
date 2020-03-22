@@ -3,4 +3,4 @@ server:
   servlet:
     context-path: /springboot-web
   tomcat:
-    max-threads: 3
+    max-threads: 200
