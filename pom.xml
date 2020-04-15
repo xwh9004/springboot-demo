@@ -7,26 +7,48 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
     <artifactId>springboot-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>springboot-web</module>
-    </modules>
+
     <packaging>pom</packaging>
 
+    <modules>
+        <module>springboot-web</module>
+        <module>springboot-data</module>
+    </modules>
+
+    <properties>
+        <elasticsearch.version>7.4.2</elasticsearch.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>2.1.6.RELEASE</version>
+                <version>2.2.6.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>2.2.6.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>2.2.6.RELEASE</version>
             </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <dependencies>
@@ -41,6 +63,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
 </project>
