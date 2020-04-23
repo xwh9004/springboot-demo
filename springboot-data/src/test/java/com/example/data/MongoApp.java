@@ -25,9 +25,6 @@ import static org.springframework.data.mongodb.core.query.Update.update;
  */
 @Slf4j
 public class MongoApp {
-
-
-
     public static void main(String[] args) {
         MongoOperations mongoOps = new MongoTemplate(MongoClients.create("mongodb://118.31.122.126:27017"), "test");
         Person p = new Person("Joe", 34);
