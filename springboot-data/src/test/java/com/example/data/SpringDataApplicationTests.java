@@ -40,8 +40,6 @@ public class SpringDataApplicationTests {
     @Autowired
     PropertyConfig propertyConfig;
 
-    @Autowired
-    ElasticSearchInstance esInstance;
 
     @Test
     public void db_w_Test() {
@@ -67,48 +65,6 @@ public class SpringDataApplicationTests {
 
     }
 
-    @Test
-    public void exist_index() throws IOException {
 
-        System.out.println(esInstance.indexExists("customer"));
-    }
-
-    @Test
-    public void exist_index_Async() throws IOException {
-
-        esInstance.indexExistsAsync("customer", new ActionListener<Boolean>() {
-            @Override
-            public void onResponse(Boolean aBoolean) {
-                log.info(aBoolean.toString());
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                log.info(e.toString());
-            }
-        });
-    }
-    @Test
-    public void createIndex() throws IOException {
-        Map<String, Object> message = new HashMap<>();
-        message.put("type", "text");
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("message", message);
-        Map<String, Object> mapping = new HashMap<>();
-        mapping.put("properties", properties);
-
-        Settings.Builder builder = Settings.builder()
-                .put("index.number_of_shards", 3)
-                .put("index.number_of_replicas", 2);
-        boolean response = esInstance.createIndex("twitter",mapping,builder);
-        log.info("create index {}",response);
-    }
-
-    @Test
-    public void getMapping() throws IOException {
-
-        Map<String, Object> mapping = esInstance.getMapping("twitter");
-        log.info("mapping {}",mapping);
-    }
 
 }
