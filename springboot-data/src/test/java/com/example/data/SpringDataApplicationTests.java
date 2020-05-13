@@ -43,13 +43,16 @@ public class SpringDataApplicationTests {
 
     @Test
     public void db_w_Test() {
-        User user = new User();
-        user.setId(3);
-        user.setFirstName("Jesse");
-        user.setLastName("Hsu");
-        db1_userMapper.insertUser(user);
+//        User user = new User();
+//        user.setId(4);
+//        user.setFirstName("Jesse");
+//        user.setLastName("Hsu");
+//        db1_userMapper.insertUser(user);
+        User find = db1_userMapper.queryUserById(4);
+        System.out.println(find);
     }
 
+    
 
     @Test
     public void db_r_Test() {

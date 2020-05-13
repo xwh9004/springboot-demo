@@ -8,4 +8,8 @@ public interface DB1_UserMapper {
 
     @Insert("insert into user(id,first_name,last_name) values(#{id},#{firstName},#{lastName})")
     int insertUser(User user);
+
+    User queryUserById(int id);
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.data;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version V0.1
  * @classNmae SpringDataApplication
  */
-
+@MapperScan(basePackages = "com.example.data.mapper.*")
 @SpringBootApplication(scanBasePackageClasses =SpringDataApplication.class )
 public class SpringDataApplication {
 
