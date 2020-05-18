@@ -4,7 +4,7 @@
 
 
     <select id="queryUserById" parameterType="int" resultType="com.example.data.entity.User">
-         select id,first_name firstName,last_name lastName from user where id =#{id}
+         select id,first_name firstName,last_name lastName from user where id  #{id}
     </select>
 
 </mapper>
