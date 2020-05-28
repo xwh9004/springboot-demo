@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @version V0.1
  * @classNmae MongoApi
  */
-@Component
+//@Component
 public class MongoApi {
     @Autowired
     public MongoClient client;

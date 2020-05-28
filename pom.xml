@@ -19,6 +19,8 @@
     <modules>
         <module>springboot-web</module>
         <module>springboot-data</module>
+        <module>licensing-service</module>
+        <module>spring-confsvr</module>
     </modules>
 
     <properties>

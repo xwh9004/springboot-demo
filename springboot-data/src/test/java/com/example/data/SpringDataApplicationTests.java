@@ -15,7 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,7 +53,25 @@ public class SpringDataApplicationTests {
         User find = db1_userMapper.queryUserById(4);
         System.out.println(find);
     }
+    @Test
+    public void db_w_Test_batch() {
+        User user = new User();
+        user.setUserId("1005");
+        user.setFirstName("Jesse");
+        user.setLastName("Hsu");
 
+        User user2 = new User();
+        user2.setUserId("1006");
+        user2.setFirstName("Jesse");
+        user2.setLastName("Hsu");
+
+        List<User> list = new ArrayList<>();
+        list.add(user);
+        list.add(user2);
+      int res =  db1_userMapper.batchInsertUsers(list);
+//        User find = db1_userMapper.queryUserById(4);
+        System.out.println(res);
+    }
     
 
     @Test

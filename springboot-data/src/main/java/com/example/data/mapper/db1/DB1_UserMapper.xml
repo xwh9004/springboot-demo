@@ -7,4 +7,11 @@
          select id,first_name firstName,last_name lastName from user where id  #{id}
     </select>
 
+    <insert id="batchInsertUsers"  keyProperty="id" useGeneratedKeys="true" parameterType="java.util.List">
+          insert into user(user_id,first_name,last_name) values
+          <foreach collection="list" item="item" separator=",">
+              (#{item.userId},#{item.firstName},#{item.lastName})
+          </foreach>
+    </insert>
+
 </mapper>

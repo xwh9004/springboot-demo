@@ -21,12 +21,12 @@ import static java.util.Collections.singletonList;
  * @version V0.1
  * @classNmae MongoConfig
  */
-@Configuration
+//@Configuration
 public class MongoConfig {
     /*
      * Use the standard Mongo driver API to create a com.mongodb.client.MongoClient instance.
      */
-     @Bean
+//     @Bean
      public  MongoClient mongoClient() {
 
         return MongoClients.create("mongodb://118.31.122.126:27017");
