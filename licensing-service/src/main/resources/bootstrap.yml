@@ -14,8 +14,8 @@ spring:
 example:
   property: this is demo
 management:
-  server:
-    port: 8081   #该端口不配置则和应用程序端口一致
+  #server:
+   # port: 8081   #该端口不配置则和应用程序端口一致
   endpoints:
     web:
       exposure:

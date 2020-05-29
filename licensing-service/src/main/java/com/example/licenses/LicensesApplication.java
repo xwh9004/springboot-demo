@@ -16,6 +16,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @SpringBootApplication
 @RefreshScope
+
 @EnableDiscoveryClient   //使服务能够使用DiscoveryClient和Ribbon库
 public class LicensesApplication {
 
