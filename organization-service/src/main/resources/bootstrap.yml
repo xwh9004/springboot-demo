@@ -5,4 +5,7 @@ spring:
     active: default
   cloud:
     config:
-      allow-override: true
+      uri: http://localhost:8888
+
+  main:
+    allow-bean-definition-overriding: true

@@ -7,4 +7,4 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///E:/workspace/springboot-demo/spring-confsvr/src/main/resources/config/licensingservice
+          search-locations: file:///E:/workspace/springboot-demo/spring-confsvr/src/main/resources/config/licensingservice,file:///E:/workspace/springboot-demo/spring-confsvr/src/main/resources/config/organizationservice
