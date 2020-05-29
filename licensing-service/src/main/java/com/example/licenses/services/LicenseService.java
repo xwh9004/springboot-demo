@@ -1,12 +1,12 @@
 package com.example.licenses.services;
 
 import com.example.common.entity.Organization;
-import com.example.licenses.config.OrganizationDiscoveryClient;
+import com.example.licenses.client.OrganizationDiscoveryClient;
+import com.example.licenses.client.OrganizationFeignClient;
 import com.example.licenses.config.ServiceConfig;
 import com.example.licenses.model.License;
 import com.example.licenses.repository.LicenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +29,9 @@ public class LicenseService {
     private LicenseRepository licenseRepository;
     @Autowired
     private OrganizationDiscoveryClient organizationClient;
+    //Fegin客户端
+    @Autowired
+    private OrganizationFeignClient organizationFeignlient;
 
     public License getLicense(String organizationId, String licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
@@ -58,6 +61,7 @@ public class LicenseService {
     }
 
     private Organization retrieveOrgInfo(String clientType) {
-        return organizationClient.getOrganization(clientType);
+//        return organizationClient.getOrganization(clientType);
+        return organizationFeignlient.getOrganization(clientType);
     }
 }

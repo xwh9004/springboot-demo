@@ -1,4 +1,4 @@
-package com.example.licenses.config;
+package com.example.licenses.client;
 
 import com.example.common.entity.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,18 @@ public class OrganizationDiscoveryClient {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired RestTemplate restTemplate;
+
     public Organization getOrganization(String organizationId) {
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
         //获取组织服务的所有实例列表
-        List<ServiceInstance> instances = discoveryClient.getInstances("organizationservice");
-        if (instances.size() == 0) return null;
-        String serviceUri = String.format("%s/v1/organizations/%s", instances.get(0).getUri().toString(), organizationId);
+//        List<ServiceInstance> instances = discoveryClient.getInstances("organizationservice");
+//        if (instances.size() == 0) return null;
+//        String serviceUri = String.format("%s/v1/organizations/%s", instances.get(0).getUri().toString(), organizationId);
         //http 远程调用获取Organization
+
+        //使用Ribbon 的RestTemplate 使用Eureka 的服务ID构建URL
+        String serviceUri ="http://organizationservice/v1/organizations/{organizationId}";
         ResponseEntity<Organization> restExchange = restTemplate
                 .exchange(serviceUri, HttpMethod.GET, null, Organization.class, organizationId);
 
