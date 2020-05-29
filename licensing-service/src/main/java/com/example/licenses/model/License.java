@@ -36,6 +36,15 @@ public class License implements Serializable {
     @Column(name = "comment",nullable = false)
     private String comment;
 
+    private String organizationName;
+
+    private String contactName;
+
+    private String contactEmail;
+
+    private String contactPhone;
+
+
     public License withLicenseId(String licenseId){
         this.licenseId = licenseId;
         return this;
@@ -54,8 +63,26 @@ public class License implements Serializable {
         return this;
     }
 
-    public License withOrganization(String organizationId){
+    public License withOrganizationId(String organizationId){
         this.organizationId = organizationId;
+        return this;
+    }
+
+    public License withOrganizationName(String organizationName){
+        this.organizationName = organizationName;
+        return this;
+    }
+
+    public License withContactName(String contactName){
+        this.contactName = contactName;
+        return this;
+    }
+    public License withContactEmail(String contactEmail){
+        this.contactEmail = contactEmail;
+        return this;
+    }
+    public License withContactPhone(String contactPhone){
+        this.contactPhone = contactPhone;
         return this;
     }
 }

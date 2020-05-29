@@ -2,6 +2,7 @@ package com.example.licenses.services;
 
 import com.example.licenses.config.ServiceConfig;
 import com.example.licenses.model.License;
+import com.example.licenses.model.Organization;
 import com.example.licenses.repository.LicenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,23 +22,38 @@ import java.util.UUID;
 @Service
 public class LicenseService {
     @Autowired
+    ServiceConfig serviceConfig;
+    @Autowired
     private LicenseRepository licenseRepository;
 
-    @Autowired
-    ServiceConfig serviceConfig;
-
-    public License getLicense(String organizationId,String licenseId){
+    public License getLicense(String organizationId, String licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-      return  license.withComment(serviceConfig.getExampleProperty());
+        return license.withComment(serviceConfig.getExampleProperty());
     }
 
-    public List<License> getLicenseByOrg(String organizationId){
+    public List<License> getLicenseByOrg(String organizationId) {
         List<License> list = licenseRepository.findByOrganizationId(organizationId);
-        return  list;
+        return list;
     }
-    public License saveLicense(License license){
+
+    public License saveLicense(License license) {
         license.withLicenseId(UUID.randomUUID().toString()).withLicenseType("test");
         licenseRepository.save(license);
         return license;
+    }
+
+    public License getLicense(String organizationId, String licenseId, String clientType) {
+        License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
+        Organization org = retrieveOrgInfo(clientType);
+        return license
+                .withOrganizationName(org.getName())
+                .withContactName(org.getContactName())
+                .withContactEmail(org.getContactEmail())
+                .withContactPhone(org.getContactPhone())
+                .withComment(serviceConfig.getExampleProperty());
+    }
+
+    private Organization retrieveOrgInfo(String clientType) {
+        return new Organization();
     }
 }

@@ -31,13 +31,22 @@ public class LicenseServiceController {
     }
 
     @RequestMapping( value = "/save/{productName}/{comment}", method = RequestMethod.POST )
-    public String saveLicense(@PathVariable( value = "organizationId" ) String organization,
-                               @PathVariable( value = "productName" ) String productName,
-                               @PathVariable( value = "comment" ) String comment) {
+    public String saveLicense(@PathVariable( value = "organizationId" ) String organizationId,
+                              @PathVariable( value = "productName" ) String productName,
+                              @PathVariable( value = "comment" ) String comment) {
         License license = new License()
                 .withComment(comment)
                 .withProductName(productName)
-                .withOrganization(organization);
+                .withOrganizationId(organizationId);
         return licenseService.saveLicense(license).getLicenseId();
+    }
+
+    @RequestMapping( value = "/{licenseId}/{clientType}", method = RequestMethod.GET )
+    public License getLicensesWithClient(
+            @PathVariable( value = "organizationId" ) String organizationId,
+            @PathVariable( value = "licenseId" ) String licenseId,
+            @PathVariable( value = "clientType" ) String clientType) {
+
+        return licenseService.getLicense(organizationId,licenseId, clientType);
     }
 }
