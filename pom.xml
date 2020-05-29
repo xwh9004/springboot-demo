@@ -23,6 +23,7 @@
         <module>spring-confsvr</module>
         <module>spring-eurekasvr</module>
         <module>organization-service</module>
+        <module>springcloud-common</module>
     </modules>
 
     <properties>

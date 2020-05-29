@@ -20,4 +20,21 @@ public class Organization {
     private String contactEmail;
 
     private String contactPhone;
+
+    public Organization withName (String name){
+        this.name = name;
+        return this;
+    }
+    public Organization withContactName (String contactName){
+        this.contactName = contactName;
+        return this;
+    }
+    public Organization withContactEmail (String contactEmail){
+        this.contactEmail = contactEmail;
+        return this;
+    }
+    public Organization withContactPhone (String contactPhone){
+        this.contactPhone = contactPhone;
+        return this;
+    }
 }
