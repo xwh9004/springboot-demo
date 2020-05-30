@@ -2,6 +2,7 @@ package com.example.organization;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 /**
  * <p><b>Description:</b>
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version V0.1
  * @classNmae OrganizationApplication
  */
+@EntityScan("com.example.*")  //添加Entity扫描路径 解决引入三方jar中的实体类无法映射问题
 @SpringBootApplication
 public class OrganizationApplication {
 

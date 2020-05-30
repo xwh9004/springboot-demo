@@ -8,3 +8,4 @@ eureka:
       defalut: http://localhost:8761/eureka/
 server:
   port: 8082
+
