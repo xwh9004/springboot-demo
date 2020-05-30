@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * <p><b>Description:</b>
  * TODO
@@ -40,13 +42,10 @@ public class LicenseServiceController {
                 .withOrganizationId(organizationId);
         return licenseService.saveLicense(license).getLicenseId();
     }
+    @RequestMapping( value = "", method = RequestMethod.GET )
+    public List<License> getLicensesByOrgId(
+            @PathVariable( value = "organizationId" ) String organizationId) {
 
-    @RequestMapping( value = "/{licenseId}/{clientType}", method = RequestMethod.GET )
-    public License getLicensesWithClient(
-            @PathVariable( value = "organizationId" ) String organizationId,
-            @PathVariable( value = "licenseId" ) String licenseId,
-            @PathVariable( value = "clientType" ) String clientType) {
-
-        return licenseService.getLicense(organizationId,licenseId, clientType);
+        return licenseService.getLicensesByOrg(organizationId);
     }
 }

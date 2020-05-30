@@ -9,8 +9,10 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
-
-
+### Ribbon 配置
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
 example:
   property: this is demo
 management:

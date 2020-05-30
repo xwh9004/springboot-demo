@@ -2,6 +2,7 @@ package com.example.licenses;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -22,6 +23,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients  //使用Feign客户端
 @SpringBootApplication
 @RefreshScope
+@EnableCircuitBreaker  //告诉spring cloud 将要为服务使用Hystrix
 public class LicensesApplication {
 
     public static void main(String[] args) {
