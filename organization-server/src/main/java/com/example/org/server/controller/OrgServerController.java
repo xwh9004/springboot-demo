@@ -1,9 +1,9 @@
 package com.example.org.server.controller;
 
 import com.example.common.entity.Organization;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.org.server.service.OrganizationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p><b>Description:</b>
@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrgServerController {
 
+    @Autowired
+    OrganizationService organizationService;
+
     @RequestMapping( "/{organizationId}" )
     public Organization getOrganization(@PathVariable( value = "organizationId" ) String organizationId) {
-        return new Organization()
-                .withName("test-org-server")
-                .withContactEmail("test@1233.com")
-                .withContactName("test")
-                .withContactPhone("1233455667");
+        return organizationService.getOrganization(organizationId);
+    }
+    @PostMapping( "/save" )
+    public Organization save(@RequestBody Organization organization) {
+        return organizationService.saveOrganization(organization);
     }
 }
