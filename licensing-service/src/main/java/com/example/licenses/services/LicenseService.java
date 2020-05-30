@@ -4,15 +4,21 @@ import com.example.common.entity.Organization;
 import com.example.common.util.RandUtil;
 import com.example.licenses.client.OrganizationDiscoveryClient;
 import com.example.licenses.client.OrganizationFeignClient;
+import com.example.licenses.config.HystrixConfigProperties;
 import com.example.licenses.config.ServiceConfig;
 import com.example.licenses.model.License;
 import com.example.licenses.repository.LicenseRepository;
+import com.netflix.hystrix.HystrixTimerThreadPoolProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.strategy.properties.HystrixPropertiesCommandDefault;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.netflix.hystrix.HystrixProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -26,6 +32,7 @@ import java.util.UUID;
  * @version V0.1
  * @classNmae LicenseService
  */
+@Slf4j
 @Service
 public class LicenseService {
     @Autowired
@@ -38,13 +45,32 @@ public class LicenseService {
     @Autowired
     private OrganizationFeignClient organizationFeignlient;
 
+    @Autowired
+    private  HystrixConfigProperties hystrixConfigProperties;
+
     /**
      * 使用@HystrixCommand注解会使用Hystrix断路器包装getLicensesByOrg方法
+     * 并且添加容错方法
      * @param organizationId
      * @return
      */
-    @HystrixCommand
+    @HystrixCommand(
+            fallbackMethod ="buildFallbackLicenseList",
+            threadPoolKey = "licenseByOrgThreadPool",   //定义独立的线程池
+            threadPoolProperties = {
+                  //  @HystrixProperty(name = "coreSize",value = "15"),  将改配置移动到application.yml 中
+                    @HystrixProperty(name = "maxQueueSize",value = "10")
+            },
+            commandProperties = {
+                    @HystrixProperty(name="circuitBreaker.requestVolumeThreshold",value = "10"),
+                    @HystrixProperty(name="circuitBreaker.errorThresholdPercentage",value = "75"),
+                    @HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds",value = "7000"),
+                    @HystrixProperty(name="metrics.rollingStats.timeInMilliseconds",value = "15000"),
+                    @HystrixProperty(name="metrics.rollingStats.numBuckets",value = "5"),
+            }
+    )
     public List<License> getLicensesByOrg(String organizationId) {
+        log.info(" LicenseService getLicensesByOrg Thread Name ={},id = {}",Thread.currentThread().getName(),Thread.currentThread().getId());
         //随机超时
         RandUtil.randomlyRunLong(3);
         List<License> list = licenseRepository.findByOrganizationId(organizationId);
@@ -76,14 +102,25 @@ public class LicenseService {
      * @return
      */
     @HystrixCommand(commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "10000")
-    })
+//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "10000")
+    }
+            )
     private Organization retrieveOrgInfo(String orgId) {
+        log.info(" LicenseService retrieveOrgInfo Thread Name ={},id = {}",Thread.currentThread().getName(),Thread.currentThread().getId());
 
         //不过没有修改配置ribbon或者feign的超时i时间 这里不是用FeignClient的原因是FeginClient的默认有5s超时的机制
         return organizationClient.getOrganization(orgId);
 //        return organizationFeignlient.getOrganization(orgId);
     }
 
+    private List<License> buildFallbackLicenseList(String orgId){
+        List list = new ArrayList();
+        License license = new License()
+                .withLicenseId("0000000000000-0000000000")
+                .withOrganizationId(orgId)
+                .withProductName("sorry no licensing information currently available");
+        list.add(license);
+        return list;
+    }
 
 }

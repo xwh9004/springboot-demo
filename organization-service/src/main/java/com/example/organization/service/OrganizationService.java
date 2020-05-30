@@ -1,6 +1,7 @@
 package com.example.organization.service;
 
 import com.example.common.entity.Organization;
+import com.example.common.util.RandUtil;
 import com.example.organization.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ public class OrganizationService {
 
 
     public Organization getOrganization(String organizationId){
+        RandUtil.randomlyRunLong(3);
         return organizationRepository.findById(organizationId).get();
     }
 
