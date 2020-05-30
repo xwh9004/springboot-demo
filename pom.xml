@@ -24,6 +24,7 @@
         <module>spring-eurekasvr</module>
         <module>organization-service</module>
         <module>springcloud-common</module>
+        <module>organization-server</module>
     </modules>
 
     <properties>
