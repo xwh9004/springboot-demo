@@ -1,4 +1,4 @@
-package com.example.licenses.filter;
+package com.example.licenses.support;
 
 import org.springframework.util.Assert;
 

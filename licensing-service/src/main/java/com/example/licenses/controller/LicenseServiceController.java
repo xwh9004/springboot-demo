@@ -1,6 +1,6 @@
 package com.example.licenses.controller;
 
-import com.example.licenses.filter.UserContextHolder;
+import com.example.licenses.support.UserContextHolder;
 import com.example.licenses.model.License;
 import com.example.licenses.services.LicenseService;
 import lombok.extern.slf4j.Slf4j;

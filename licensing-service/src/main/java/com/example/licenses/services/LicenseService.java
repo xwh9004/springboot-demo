@@ -6,22 +6,17 @@ import com.example.licenses.client.OrganizationDiscoveryClient;
 import com.example.licenses.client.OrganizationFeignClient;
 import com.example.licenses.config.HystrixConfigProperties;
 import com.example.licenses.config.ServiceConfig;
-import com.example.licenses.filter.UserContextHolder;
+import com.example.licenses.support.UserContextHolder;
 import com.example.licenses.model.License;
 import com.example.licenses.repository.LicenseRepository;
-import com.netflix.hystrix.HystrixTimerThreadPoolProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.netflix.hystrix.strategy.properties.HystrixPropertiesCommandDefault;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.netflix.hystrix.HystrixProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -89,6 +84,7 @@ public class LicenseService {
     public License getLicense(String organizationId, String licenseId) {
         log.info("LicenseService getLicense CorrelationId = {}", UserContextHolder.getContext().getCorrelationId());
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
+
         Organization org = retrieveOrgInfo(organizationId);
         return license
                 .withOrganizationName(org.getName())
@@ -113,7 +109,7 @@ public class LicenseService {
                     @HystrixProperty(name = "maxQueueSize",value = "10")
             }
             ,commandProperties = {
-            //  @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "10000"),
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "10000"),
             @HystrixProperty(name="circuitBreaker.requestVolumeThreshold",value = "10"),
             @HystrixProperty(name="circuitBreaker.errorThresholdPercentage",value = "75"),
             @HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds",value = "7000"),
