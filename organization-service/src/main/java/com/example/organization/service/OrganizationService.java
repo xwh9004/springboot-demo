@@ -13,7 +13,7 @@ public class OrganizationService {
 
 
     public Organization getOrganization(String organizationId){
-        RandUtil.randomlyRunLong(3);
+//        RandUtil.randomlyRunLong(3);
         return organizationRepository.findById(organizationId).get();
     }
 

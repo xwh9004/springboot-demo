@@ -25,6 +25,7 @@
         <module>organization-service</module>
         <module>springcloud-common</module>
         <module>organization-server</module>
+        <module>spring-zuul</module>
     </modules>
 
     <properties>
