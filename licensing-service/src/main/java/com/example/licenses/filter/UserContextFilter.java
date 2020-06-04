@@ -1,5 +1,6 @@
 package com.example.licenses.filter;
 
+import com.example.common.entity.UserContext;
 import com.example.licenses.support.UserContextHolder;
 import org.springframework.stereotype.Component;
 
