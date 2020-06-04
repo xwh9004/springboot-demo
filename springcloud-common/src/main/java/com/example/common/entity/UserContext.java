@@ -1,4 +1,4 @@
-package com.example.licenses.support;
+package com.example.common.entity;
 
 import lombok.Data;
 

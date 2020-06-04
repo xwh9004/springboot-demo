@@ -17,13 +17,13 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>springcloud-common</module>
         <module>springboot-web</module>
         <module>springboot-data</module>
         <module>licensing-service</module>
         <module>spring-confsvr</module>
         <module>spring-eurekasvr</module>
         <module>organization-service</module>
-        <module>springcloud-common</module>
         <module>organization-server</module>
         <module>spring-zuul</module>
     </modules>
