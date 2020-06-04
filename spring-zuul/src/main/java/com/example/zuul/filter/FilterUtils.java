@@ -1,10 +1,9 @@
 package com.example.zuul.filter;
 
-import com.example.common.entity.UserContext;
 import com.netflix.zuul.context.RequestContext;
 import org.springframework.stereotype.Component;
 
-import static com.example.common.entity.UserContext.CORRELATION_ID;
+import static com.example.common.util.UserContext.CORRELATION_ID;
 
 
 /**

@@ -1,7 +1,7 @@
 package com.example.licenses.filter;
 
-import com.example.common.entity.UserContext;
-import com.example.licenses.support.UserContextHolder;
+import com.example.common.util.UserContext;
+import com.example.common.util.UserContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;

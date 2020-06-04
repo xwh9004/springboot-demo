@@ -1,6 +1,5 @@
-package com.example.licenses.support;
+package com.example.common.util;
 
-import com.example.common.entity.UserContext;
 import org.springframework.util.Assert;
 
 public class UserContextHolder {

@@ -6,7 +6,7 @@ import com.example.licenses.client.OrganizationDiscoveryClient;
 import com.example.licenses.client.OrganizationFeignClient;
 import com.example.licenses.config.HystrixConfigProperties;
 import com.example.licenses.config.ServiceConfig;
-import com.example.licenses.support.UserContextHolder;
+import com.example.common.util.UserContextHolder;
 import com.example.licenses.model.License;
 import com.example.licenses.repository.LicenseRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;

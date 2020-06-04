@@ -1,6 +1,5 @@
 package com.example.zuul.filter;
 
-import com.example.common.util.RandUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
-import static com.example.common.entity.UserContext.CORRELATION_ID;
+import static com.example.common.util.UserContext.CORRELATION_ID;
 
 /**
  * <p><b>Description:</b>
@@ -62,8 +61,7 @@ public class TrackingFilter extends ZuulFilter {
 
 
     private String generateCorrelationId() {
-//       return UUID.get().toString();
-        return null;
+        return UUID.randomUUID().toString();
     }
 
     private boolean isCorrelationIdPresent() {

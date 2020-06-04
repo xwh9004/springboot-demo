@@ -1,5 +1,6 @@
 package com.example.licenses.support;
 
+import com.example.common.util.UserContextHolder;
 import com.netflix.hystrix.HystrixThreadPoolKey;
 import com.netflix.hystrix.HystrixThreadPoolProperties;
 import com.netflix.hystrix.strategy.concurrency.HystrixConcurrencyStrategy;
@@ -54,7 +55,7 @@ public  class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy {
     @Override
     public <T> Callable<T> wrapCallable(Callable<T> callable) {
         return exsitingConcurrencyStrategy!=null?
-                exsitingConcurrencyStrategy.wrapCallable(new DelegatingUserContextCallable<>(callable,UserContextHolder.getContext())):
+                exsitingConcurrencyStrategy.wrapCallable(new DelegatingUserContextCallable<>(callable, UserContextHolder.getContext())):
                 super.wrapCallable(new DelegatingUserContextCallable<>(callable,UserContextHolder.getContext()));
     }
 }
