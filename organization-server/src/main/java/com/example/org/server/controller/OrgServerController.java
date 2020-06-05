@@ -2,6 +2,7 @@ package com.example.org.server.controller;
 
 import com.example.common.entity.Organization;
 import com.example.org.server.service.OrganizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @version V0.1
  * @classNmae OrganizationController
  */
+@Slf4j
 @RequestMapping( "v1/organizations" )
 @RestController
 public class OrgServerController {
@@ -23,6 +25,7 @@ public class OrgServerController {
 
     @RequestMapping( "/{organizationId}" )
     public Organization getOrganization(@PathVariable( value = "organizationId" ) String organizationId) {
+        log.info(" organization-server OrgServerController getOrganization");
         return organizationService.getOrganization(organizationId);
     }
     @PostMapping( "/save" )

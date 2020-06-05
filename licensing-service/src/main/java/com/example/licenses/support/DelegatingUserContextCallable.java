@@ -1,5 +1,6 @@
 package com.example.licenses.support;
 
+import com.example.common.util.UserContext;
 import com.example.common.util.UserContextHolder;
 import com.netflix.hystrix.HystrixThreadPoolKey;
 import com.netflix.hystrix.HystrixThreadPoolProperties;

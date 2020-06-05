@@ -1,8 +1,10 @@
 package com.example.organization;
 
+import com.example.common.util.UserContextFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 
 /**
  * <p><b>Description:</b>
@@ -19,5 +21,10 @@ public class OrganizationApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(OrganizationApplication.class);
+    }
+
+    @Bean
+    public UserContextFilter userContextFilter(){
+        return new UserContextFilter();
     }
 }

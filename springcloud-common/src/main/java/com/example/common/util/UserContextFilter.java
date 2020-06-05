@@ -1,14 +1,12 @@
-package com.example.licenses.filter;
+package com.example.common.util;
 
-import com.example.common.util.UserContext;
-import com.example.common.util.UserContextHolder;
-import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@Component
+@Slf4j
 public class UserContextFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
@@ -21,7 +19,7 @@ public class UserContextFilter implements Filter {
         UserContextHolder.getContext().setUserId(httpServletRequest.getHeader(UserContext.USER_ID));
         UserContextHolder.getContext().setAuthToken(httpServletRequest.getHeader(UserContext.AUTH_TOKEN));
         UserContextHolder.getContext().setOrgId(httpServletRequest.getHeader(UserContext.ORG_ID));
-
+        log.info("UserContext = {}",UserContextHolder.getContext());
         filterChain.doFilter(httpServletRequest,servletResponse);
     }
 }

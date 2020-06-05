@@ -69,7 +69,7 @@ public class LicenseService {
         log.info("LicenseService getLicensesByOrg CorrelationId ={} ", UserContextHolder.getContext().getCorrelationId());
         log.info(" LicenseService getLicensesByOrg Thread Name ={},id = {}",Thread.currentThread().getName(),Thread.currentThread().getId());
         //随机超时
-        RandUtil.randomlyRunLong(3);
+//        RandUtil.randomlyRunLong(3);
         List<License> list = licenseRepository.findByOrganizationId(organizationId);
 
         return list;

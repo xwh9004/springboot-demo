@@ -30,7 +30,7 @@ zuul:
     licensestatic:
       path: /licensestatic/**
       url: http://localhost:9090/
-    #exclude auto routes by zuul #
+   # exclude auto routes by zuul #
   #ignored-services: "*"
   ignored-services: ["organizationservice","licensingservice"]
 #  prefix: /api

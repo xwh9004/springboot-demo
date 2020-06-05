@@ -20,10 +20,9 @@ import static com.example.common.util.UserContext.CORRELATION_ID;
  * @version V0.1
  * @classNmae TrackingFilter
  */
-
 @Slf4j
 @Component
-public class TrackingFilter extends ZuulFilter {
+public class ResponseFilter extends ZuulFilter {
 
     private static final int FILTER_ORDER = 1;
 
@@ -35,7 +34,7 @@ public class TrackingFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
-        return FilterUtils.PRE_FILTER_TYPE;
+        return FilterUtils.POST_FILTER_TYPE;
     }
 
     @Override
@@ -50,28 +49,16 @@ public class TrackingFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        if (isCorrelationIdPresent()) {
-            log.info("tmx-correlation-id found in tracking filter:{}", filterUtils.getCorrelationId());
-        } else {
-            filterUtils.setCorrelationId(generateCorrelationId());
-            log.info("tmx-correlation-id generate in tracking filter:{}", filterUtils.getCorrelationId());
-        }
-        RequestContext ctx = RequestContext.getCurrentContext();
-        log.info("processing incoming request for {}", ctx.getRequest().getRequestURI());
+       RequestContext ctx = RequestContext.getCurrentContext();
+       log.info("Adding the correlation id to the outbound headers. {}",filterUtils.getCorrelationId());
+
+       ctx.getResponse().addHeader(CORRELATION_ID,filterUtils.getCorrelationId());
+
+       log.info("Completing outgoing request for {}.",ctx.getRequest().getRequestURI());
         return null;
     }
 
 
 
-    private String generateCorrelationId() {
-        return UUID.randomUUID().toString();
-    }
 
-    private boolean isCorrelationIdPresent() {
-        RequestContext ctx = RequestContext.getCurrentContext();
-        if(ctx.getRequest().getHeader(CORRELATION_ID)!=null){
-            return true;
-        }
-        return false;
-    }
 }
