@@ -27,6 +27,7 @@
         <module>organization-server</module>
         <module>spring-zuul</module>
         <module>licensing-static</module>
+        <module>authentication-service</module>
     </modules>
 
     <properties>
