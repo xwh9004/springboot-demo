@@ -9,3 +9,10 @@ eureka:
 server:
   port: 8082
 
+#    user:
+#      name: admin
+#      password: 123456
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8901/auth/user
