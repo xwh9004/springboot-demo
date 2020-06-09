@@ -50,7 +50,7 @@ import java.util.Random;
  * @classNmae SpecialRouter
  */
 @Slf4j
-@Component
+//@Component
 public class SpecialRouterFilter extends ZuulFilter {
     private static final boolean SHOULD_FILTER = true;
     private static final int FILTER_ORDER = 1;

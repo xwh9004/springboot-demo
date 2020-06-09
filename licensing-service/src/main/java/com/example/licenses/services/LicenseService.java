@@ -4,6 +4,7 @@ import com.example.common.entity.Organization;
 import com.example.common.util.RandUtil;
 import com.example.licenses.client.OrganizationDiscoveryClient;
 import com.example.licenses.client.OrganizationFeignClient;
+import com.example.licenses.client.OrganizationRestTemplateClient;
 import com.example.licenses.config.HystrixConfigProperties;
 import com.example.licenses.config.ServiceConfig;
 import com.example.common.util.UserContextHolder;
@@ -42,32 +43,36 @@ public class LicenseService {
     private OrganizationFeignClient organizationFeignlient;
 
     @Autowired
-    private  HystrixConfigProperties hystrixConfigProperties;
+    private OrganizationRestTemplateClient oauthRestTemplate;
+
+    @Autowired
+    private HystrixConfigProperties hystrixConfigProperties;
 
     /**
      * 使用@HystrixCommand注解会使用Hystrix断路器包装getLicensesByOrg方法
      * 并且添加容错方法
+     *
      * @param organizationId
      * @return
      */
     @HystrixCommand(
-            fallbackMethod ="buildFallbackLicenseList",
+            fallbackMethod = "buildFallbackLicenseList",
             threadPoolKey = "licenseByOrgThreadPool",   //定义独立的线程池
             threadPoolProperties = {
-                    @HystrixProperty(name = "coreSize",value = "15"),  //将改配置移动到application.yml 中
-                    @HystrixProperty(name = "maxQueueSize",value = "10")
+                    @HystrixProperty( name = "coreSize", value = "15" ),  //将改配置移动到application.yml 中
+                    @HystrixProperty( name = "maxQueueSize", value = "10" )
             },
             commandProperties = {
-                    @HystrixProperty(name="circuitBreaker.requestVolumeThreshold",value = "10"),
-                    @HystrixProperty(name="circuitBreaker.errorThresholdPercentage",value = "75"),
-                    @HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds",value = "7000"),
-                    @HystrixProperty(name="metrics.rollingStats.timeInMilliseconds",value = "15000"),
-                    @HystrixProperty(name="metrics.rollingStats.numBuckets",value = "5"),
+                    @HystrixProperty( name = "circuitBreaker.requestVolumeThreshold", value = "10" ),
+                    @HystrixProperty( name = "circuitBreaker.errorThresholdPercentage", value = "75" ),
+                    @HystrixProperty( name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000" ),
+                    @HystrixProperty( name = "metrics.rollingStats.timeInMilliseconds", value = "15000" ),
+                    @HystrixProperty( name = "metrics.rollingStats.numBuckets", value = "5" ),
             }
     )
     public List<License> getLicensesByOrg(String organizationId) {
         log.info("LicenseService getLicensesByOrg CorrelationId ={} ", UserContextHolder.getContext().getCorrelationId());
-        log.info(" LicenseService getLicensesByOrg Thread Name ={},id = {}",Thread.currentThread().getName(),Thread.currentThread().getId());
+        log.info(" LicenseService getLicensesByOrg Thread Name ={},id = {}", Thread.currentThread().getName(), Thread.currentThread().getId());
         //随机超时
 //        RandUtil.randomlyRunLong(3);
         List<License> list = licenseRepository.findByOrganizationId(organizationId);
@@ -99,33 +104,37 @@ public class LicenseService {
      * 其他属性值参考HystrixCommandProperties 类
      * retrieveOrgInfo 方法被getLicense调用，线程调用信息与getLicense线程是一个线程，这里配置HystrixCommand似乎不起作用
      * 并没有产生Hystrix的代理调用
+     *
      * @param orgId
      * @return
      */
     @HystrixCommand(
             threadPoolKey = "retrieveOrgInfoThreadPool",   //定义独立的线程池
             threadPoolProperties = {
-                    @HystrixProperty(name = "coreSize",value = "15"),  //将改配置移动到application.yml 中
-                    @HystrixProperty(name = "maxQueueSize",value = "10")
+                    @HystrixProperty( name = "coreSize", value = "15" ),  //将改配置移动到application.yml 中
+                    @HystrixProperty( name = "maxQueueSize", value = "10" )
             }
-            ,commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "10000"),
-            @HystrixProperty(name="circuitBreaker.requestVolumeThreshold",value = "10"),
-            @HystrixProperty(name="circuitBreaker.errorThresholdPercentage",value = "75"),
-            @HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds",value = "7000"),
-            @HystrixProperty(name="metrics.rollingStats.timeInMilliseconds",value = "15000"),
-            @HystrixProperty(name="metrics.rollingStats.numBuckets",value = "5")
+            , commandProperties = {
+            @HystrixProperty( name = "execution.isolation.thread.timeoutInMilliseconds", value = "10000" ),
+            @HystrixProperty( name = "circuitBreaker.requestVolumeThreshold", value = "10" ),
+            @HystrixProperty( name = "circuitBreaker.errorThresholdPercentage", value = "75" ),
+            @HystrixProperty( name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000" ),
+            @HystrixProperty( name = "metrics.rollingStats.timeInMilliseconds", value = "15000" ),
+            @HystrixProperty( name = "metrics.rollingStats.numBuckets", value = "5" )
     }
     )
     public Organization retrieveOrgInfo(String orgId) {
-        log.info(" LicenseService retrieveOrgInfo Thread Name ={},id = {}",Thread.currentThread().getName(),Thread.currentThread().getId());
+        log.info(" LicenseService retrieveOrgInfo Thread Name ={},id = {}", Thread.currentThread().getName(), Thread.currentThread().getId());
         log.info("LicenseService retrieveOrgInfo CorrelationId ={} ", UserContextHolder.getContext().getCorrelationId());
         //不过没有修改配置ribbon或者feign的超时i时间 这里不是用FeignClient的原因是FeginClient的默认有5s超时的机制
-        return organizationClient.getOrganization(orgId);
+        Organization organization = null;
+//        return organizationClient.getOrganization(orgId);
 //        return organizationFeignlient.getOrganization(orgId);
+        organization = oauthRestTemplate.getOrganization(orgId);
+        return organization;
     }
 
-    private List<License> buildFallbackLicenseList(String orgId){
+    private List<License> buildFallbackLicenseList(String orgId) {
         List list = new ArrayList();
         License license = new License()
                 .withLicenseId("0000000000000-0000000000")

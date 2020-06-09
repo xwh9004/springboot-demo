@@ -1,4 +1,4 @@
-package com.example.organization.config;
+package com.example.licenses.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,25 +20,15 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-//        resources.
-    }
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/**").permitAll()
-//                .anyRequest().authenticated();
-                //antMatchers()允许开发人员限制对受保护的URL和HTTP DELETE动词的调用
-             http
+        http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.DELETE,"/v1/organizations/**")
-                //允许访问的角色列表
-                .hasRole("ADMIN")
+//                .antMatchers("/v1/organizations/**")
+//                .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated();
+
     }
 
 }

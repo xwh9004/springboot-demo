@@ -12,6 +12,9 @@ server:
 #    user:
 #      name: admin
 #      password: 123456
+#security:
+
+
 security:
   oauth2:
     resource:

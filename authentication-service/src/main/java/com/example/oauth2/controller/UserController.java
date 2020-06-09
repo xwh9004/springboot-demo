@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,8 @@ public class UserController {
 
 
     @RequestMapping( value = "/user", produces = "application/json" )
-    public Map<String, Object> user(OAuth2Authentication user) {
+    public Map<String, Object> user(OAuth2Authentication user, HttpServletRequest request) {
+        log.info("UserController get user receive from ={}:{}:{}",request.getRemoteHost(),request.getRemotePort(),request.getRemoteAddr());
         Map<String, Object> userInfo = new HashMap<>();
         userInfo.put("user", user.getUserAuthentication().getPrincipal());
         userInfo.put("authorities",

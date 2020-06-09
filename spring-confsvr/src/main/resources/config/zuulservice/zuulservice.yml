@@ -6,6 +6,10 @@ zuul.routes.licensingservice: /licensing/**
 zuul.routes.configserver: configserver/**
 zuul.routes.licensestatic.path: /licensestatic/**
 zuul.routes.licensestatic.url: http://localhost:9090/
+#设置敏感的HTTP头部以阻止传播到下游  默认敏感头部为Cookie, Set-Cookie,Authorization
+#设置为 Cookie, Set-Cookie则其他的头部可以传播到下游 比如Authorization
+
+zuul.sensitive-headers: Cookie,setCookie
 
 spring.jpa.database: "mysql"
 spring.jpa.show-sql: "true"

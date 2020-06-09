@@ -4,6 +4,8 @@ import com.example.common.entity.Organization;
 import com.example.organization.service.OrganizationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,10 +24,17 @@ public class OrganizationController {
     @Autowired
     OrganizationService organizationService;
 
-    @RequestMapping( "/{organizationId}" )
+    @GetMapping ( "/{organizationId}" )
     public Organization getOrganization(@PathVariable( value = "organizationId" ) String organizationId) {
-        log.info(" organization-service OrganizationController getOrganization");
+        log.info("getOrganization organizationId={}",organizationId);
         return organizationService.getOrganization(organizationId);
+    }
+
+    @DeleteMapping  ( "/{organizationId}" )
+    public ResponseEntity deleteOrganization(@PathVariable( value = "organizationId" ) String organizationId) {
+        log.info("deleteOrganization organizationId={}",organizationId);
+         organizationService.deleteOrganization(organizationId);
+         return ResponseEntity.noContent().build();
     }
     @PostMapping( "/save" )
     public Organization save(@RequestBody Organization organization) {

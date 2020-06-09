@@ -21,4 +21,8 @@ public class OrganizationService {
         organizationRepository.save(organization);
         return organization;
     }
+
+    public void deleteOrganization(String organizationId){
+        organizationRepository.deleteById(organizationId);
+    }
 }

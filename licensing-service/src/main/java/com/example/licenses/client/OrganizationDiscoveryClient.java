@@ -3,6 +3,7 @@ package com.example.licenses.client;
 import com.example.common.entity.Organization;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpMethod;
@@ -27,7 +28,9 @@ public class OrganizationDiscoveryClient {
     @Autowired
     private DiscoveryClient discoveryClient;
 
-    @Autowired RestTemplate restTemplate;
+    @Qualifier("restTemplate")
+    @Autowired
+    private RestTemplate restTemplate;
 
     public Organization getOrganization(String organizationId) {
         log.info(" OrganizationDiscoveryClient getLicensesByOrg Thread id = {}",Thread.currentThread().getId());

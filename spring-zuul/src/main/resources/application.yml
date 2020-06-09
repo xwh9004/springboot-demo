@@ -21,18 +21,19 @@ management:
       exposure:
         include: "*"
 #config routes by manual
-zuul:
-  routes:
-    organizationservice: /organization/**
-    licensingservice: /licensing/**
-    configserver: configserver/**
-    #静态路由配置 该service不注册到eureka服务发现中#
-    licensestatic:
-      path: /licensestatic/**
-      url: http://localhost:9090/
-   # exclude auto routes by zuul #
-  #ignored-services: "*"
-  ignored-services: ["organizationservice","licensingservice"]
+#zuul:
+#  routes:
+#    organizationservice: /organization/**
+#    licensingservice: /licensing/**
+#    configserver: configserver/**
+#    #静态路由配置 该service不注册到eureka服务发现中#
+#    licensestatic:
+#      path: /licensestatic/**
+#      url: http://localhost:9090/
+#   # exclude auto routes by zuul #
+#  #ignored-services: "*"
+#  ignored-services: ["organizationservice","licensingservice"]
+#  sensitive-headers: Cookie,setCookie
 #  prefix: /api
 
 #note 可以将该文件的路由配置中心数据转移到spring-confsvr中以实现动态重新加载路由配置#

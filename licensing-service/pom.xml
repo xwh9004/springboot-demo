@@ -68,11 +68,23 @@
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
             <version>2.2.1.RELEASE</version>
         </dependency>
+
         <!--<dependency>-->
-            <!--<groupId>com.netflix.hystrix</groupId>-->
-            <!--<artifactId>hystrix-javanica</artifactId>-->
-            <!--<version>1.5.18</version>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-security</artifactId>-->
         <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.2.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <version>2.0.3.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <!--告诉maven构建脚本安装最新的Spring Boot Maven 插件-->

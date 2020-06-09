@@ -4,12 +4,13 @@ import com.example.common.util.UserContextFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
  * <p><b>Description:</b>
@@ -27,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients  //使用Feign客户端
 @SpringBootApplication
 @RefreshScope
+@EnableResourceServer   //配置为OAuth2受保护资源
 @EnableCircuitBreaker  //告诉spring cloud 将要为服务使用Hystrix
 public class LicensesApplication {
 

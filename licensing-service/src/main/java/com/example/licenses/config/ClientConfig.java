@@ -1,10 +1,15 @@
 package com.example.licenses.config;
 
 import com.example.licenses.interceptor.UserContextInterceptor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -18,7 +23,7 @@ public class ClientConfig {
 
 
     @LoadBalanced    //告诉springcloud 创建一个支持Ribbonde RestTempalte
-    @Bean
+    @Bean("restTemplate")
     public RestTemplate getRestTemplate(){
         RestTemplate restTemplate=  new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();
@@ -29,5 +34,12 @@ public class ClientConfig {
             restTemplate.setInterceptors(interceptors);
         }
         return restTemplate;
+    }
+
+//    @LoadBalanced
+    @Bean("oAuth2RestTemplate")
+    public OAuth2RestTemplate oAuth2RestTemplate( OAuth2ClientContext context){
+        OAuth2ProtectedResourceDetails details = new ClientCredentialsResourceDetails() ;
+        return new OAuth2RestTemplate(details,context);
     }
 }
