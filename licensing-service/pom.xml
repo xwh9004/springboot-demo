@@ -89,6 +89,19 @@
             <artifactId>spring-security-jwt</artifactId>
             <version>1.0.11.RELEASE</version>
         </dependency>
+
+        <!--引入spring cloud stream  -->
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream</artifactId>
+        </dependency>
+
+        <!--引入kafka -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+        </dependency>
     </dependencies>
 
     <!--告诉maven构建脚本安装最新的Spring Boot Maven 插件-->
