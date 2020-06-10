@@ -1,20 +1,17 @@
-package com.example.oauth2.config;
+package com.example.licenses.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.security.oauth2.provider.token.store.jwk.JwkTokenStore;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,19 +47,6 @@ public class JWTTokenStoreConfig {
         tokenServices.setTokenStore( tokenStore());
         return tokenServices;
     }
-    @Bean
-    public TokenEnhancer jwtTokenEnhancer(){
 
-        return new TokenEnhancer() {
-            @Override
-            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-                Map<String, Object> additionalInfo = new HashMap<>();
-                //对token进行增强
-                additionalInfo.put("organizationId","N0001");
-                ((DefaultOAuth2AccessToken)accessToken).setAdditionalInformation(additionalInfo);
-                return accessToken;
-            }
-        } ;
-    }
 
 }

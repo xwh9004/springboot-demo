@@ -42,7 +42,12 @@ public class OrganizationDiscoveryClient {
         //http 远程调用获取Organization
 
         //使用Ribbon 的RestTemplate 使用Eureka 的服务ID构建URL
-        String serviceUri ="http://organizationservice/v1/organizations/{organizationId}";
+//        String serviceUri ="http://organizationservice/v1/organizations/{organizationId}";
+//        ResponseEntity<Organization> restExchange = restTemplate
+//                .exchange(serviceUri, HttpMethod.GET, null, Organization.class, organizationId);
+
+        log.info("通过zuulServer 调用组织服务");
+        String serviceUri ="http://localhost:5555/api/organization/v1/organizations/{organizationId}";
         ResponseEntity<Organization> restExchange = restTemplate
                 .exchange(serviceUri, HttpMethod.GET, null, Organization.class, organizationId);
 

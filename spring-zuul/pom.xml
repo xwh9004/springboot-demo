@@ -45,6 +45,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.16</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.3</version>
+        </dependency>
     </dependencies>
 
     <!--告诉maven构建脚本安装最新的Spring Boot Maven 插件-->

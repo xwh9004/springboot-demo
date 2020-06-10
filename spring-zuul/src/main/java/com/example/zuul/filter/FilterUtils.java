@@ -3,8 +3,7 @@ package com.example.zuul.filter;
 import com.netflix.zuul.context.RequestContext;
 import org.springframework.stereotype.Component;
 
-import static com.example.common.util.UserContext.CORRELATION_ID;
-import static com.example.common.util.UserContext.ORG_ID;
+import static com.example.common.util.UserContext.*;
 
 
 /**
@@ -56,5 +55,10 @@ public class FilterUtils {
         //We might not have a service id if we are using a static, non-eureka route.
         if (ctx.get("serviceId")==null) return "";
         return ctx.get("serviceId").toString();
+    }
+
+    public final String getAuthToken(){
+        RequestContext ctx = RequestContext.getCurrentContext();
+        return ctx.getRequest().getHeader(AUTH_TOKEN);
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -22,7 +23,8 @@ import java.util.List;
 public class ClientConfig {
 
 
-    @LoadBalanced    //告诉springcloud 创建一个支持Ribbonde RestTempalte
+    @Primary
+//    @LoadBalanced    //告诉springcloud 创建一个支持Ribbonde RestTempalte
     @Bean("restTemplate")
     public RestTemplate getRestTemplate(){
         RestTemplate restTemplate=  new RestTemplate();

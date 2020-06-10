@@ -128,9 +128,9 @@ public class LicenseService {
         log.info("LicenseService retrieveOrgInfo CorrelationId ={} ", UserContextHolder.getContext().getCorrelationId());
         //不过没有修改配置ribbon或者feign的超时i时间 这里不是用FeignClient的原因是FeginClient的默认有5s超时的机制
         Organization organization = null;
-//        return organizationClient.getOrganization(orgId);
-//        return organizationFeignlient.getOrganization(orgId);
-        organization = oauthRestTemplate.getOrganization(orgId);
+        organization = organizationClient.getOrganization(orgId);
+//        organization = organizationFeignlient.getOrganization(orgId);
+//        organization = oauthRestTemplate.getOrganization(orgId);
         return organization;
     }
 
