@@ -21,7 +21,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
  * @version V0.1
  * @classNmae OAuth2Config
  */
-@Configuration
+//@Configuration
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
