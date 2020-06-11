@@ -1,5 +1,6 @@
 package com.example.licenses.config;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
  * @version V0.1
  * @classNmae ServiceConfig
  */
+@Data
 @Component
 public class ServiceConfig {
 
@@ -24,9 +26,9 @@ public class ServiceConfig {
 
     @Value("${signing.key}")
     private String jwtSigningKey="";
+    @Value("${redis.server}")
+    private String redisServer;
+    @Value("${redis.port}")
+    private int redisPort;
 
-
-    public String getJwtSigningKey() {
-        return jwtSigningKey;
-    }
 }

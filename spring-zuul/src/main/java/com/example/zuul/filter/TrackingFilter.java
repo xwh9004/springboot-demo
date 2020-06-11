@@ -60,8 +60,8 @@ public class TrackingFilter extends ZuulFilter {
             log.info("tmx-correlation-id generate in tracking filter:{}", filterUtils.getCorrelationId());
         }
 
-        log.info("The organization id from the token is {} " ,getOrganizationId());
-        filterUtils.setOrgId(getOrganizationId());
+//        log.info("The organization id from the token is {} " ,getOrganizationId());
+//        filterUtils.setOrgId(getOrganizationId());
 
         RequestContext ctx = RequestContext.getCurrentContext();
         log.info("processing incoming request for {}", ctx.getRequest().getRequestURI());

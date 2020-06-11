@@ -7,6 +7,6 @@ spring.datasource.username: "Jesse"
 spring.datasource.password: "Jesse@123456"
 
 #oauth2 client 配置#
-security.oauth2.resource.user-info-uri: http://localhost:8901/auth/user
-security.oauth2.client.grant-type: client_credentials
+#security.oauth2.resource.user-info-uri: http://localhost:8901/auth/user
+#security.oauth2.client.grant-type: client_credentials
 

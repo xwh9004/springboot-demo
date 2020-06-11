@@ -11,6 +11,9 @@ eureka:
 signing:
   key: 345345fsdgsf5345
 
+redis:
+  server: 118.31.122.126
+  port: 6379
 
 
 

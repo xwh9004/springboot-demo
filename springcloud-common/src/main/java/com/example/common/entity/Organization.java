@@ -27,6 +27,10 @@ public class Organization implements Serializable {
     @Column(name = "contact_phone",nullable = false)
     private String contactPhone;
 
+    public Organization withId (String organizationId){
+        this.organizationId = organizationId;
+        return this;
+    }
     public Organization withName (String name){
         this.name = name;
         return this;
