@@ -17,7 +17,7 @@ server:
 signing:
   key: 345345fsdgsf5345
 
-
+#暂时关闭security#
 security:
   oauth2:
     resource:

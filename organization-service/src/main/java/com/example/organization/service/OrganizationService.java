@@ -23,6 +23,7 @@ public class OrganizationService {
 
     public Organization saveOrganization(Organization organization){
         organizationRepository.save(organization);
+        //对服务中修改组织数据的每一个方法，调用simpleSourceBean,publishOrgChange()发布消息
         simpleSourceBean.publishOrgChange("SAVE",organization.getOrganizationId());
         return organization;
     }

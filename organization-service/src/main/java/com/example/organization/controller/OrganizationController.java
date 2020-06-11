@@ -36,8 +36,9 @@ public class OrganizationController {
          organizationService.deleteOrganization(organizationId);
          return ResponseEntity.noContent().build();
     }
-    @PostMapping( "/save" )
-    public Organization save(@RequestBody Organization organization) {
+    @PutMapping( "/{organizationId}" )
+    public Organization save(@PathVariable( value = "organizationId" ) String organizationId,@RequestBody Organization organization ) {
+
         return organizationService.saveOrganization(organization);
     }
 }
