@@ -16,7 +16,6 @@ redis:
   port: 6379
 
 
-
 #hystrix properties
 #hystrix:
 #  threadpool:
@@ -31,3 +30,7 @@ security:
       grant-type: client_credentials
     resource:
       user-info-uri: http://localhost:8901/auth/user
+#配置log 日志级别#
+logging:
+  level:
+    root: info

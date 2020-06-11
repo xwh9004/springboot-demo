@@ -8,7 +8,7 @@ spring:
       uri: http://localhost:8888
     stream:
       bindings:
-        input:
+        inboundOrgChanges:   ##可以自定义消息通道名称 如 inboundOrgChanges
           destination: orgChangeTopic
           group: licensingGroup
       kafka:

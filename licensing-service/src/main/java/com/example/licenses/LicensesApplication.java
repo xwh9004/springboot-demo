@@ -32,7 +32,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  * @classNmae LicensesApplication
  */
 @Slf4j
-@EnableBinding(Sink.class)  //@EnableBing 注解告诉服务使用Sink接口中定义的通道来监听传入的消息
+//@EnableBinding(Sink.class)  //@EnableBing 注解告诉服务使用Sink接口中定义的通道来监听传入的消息
 // @EnableDiscoveryClient   //使服务能够使用DiscoveryClient和Ribbon库
 @EnableFeignClients  //使用Feign客户端
 @RefreshScope
@@ -52,10 +52,10 @@ public class LicensesApplication {
     }
 
 
-    @StreamListener( Sink.INPUT )
-    public void loggerSink(OrganizationChangeModel organizationChangeModel){
-
-        log.info("Received an event fro organization id {}",organizationChangeModel.getOrganizationId());
-    }
+//    @StreamListener( Sink.INPUT )
+//    public void loggerSink(OrganizationChangeModel organizationChangeModel){
+//
+//        log.info("Received an event for organization id {}",organizationChangeModel.getOrganizationId());
+//    }
 
 }

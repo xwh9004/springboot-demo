@@ -18,7 +18,9 @@ public class OrganizationService {
 
     public Organization getOrganization(String organizationId){
 //        RandUtil.randomlyRunLong(3);
-        return organizationRepository.findById(organizationId).get();
+        Organization organization = organizationRepository.findById(organizationId).get();
+        simpleSourceBean.publishOrgChange("GET",organization.getOrganizationId());
+        return organization;
     }
 
     public Organization saveOrganization(Organization organization){
@@ -30,5 +32,6 @@ public class OrganizationService {
 
     public void deleteOrganization(String organizationId){
         organizationRepository.deleteById(organizationId);
+        simpleSourceBean.publishOrgChange("DELETE",organizationId);
     }
 }
