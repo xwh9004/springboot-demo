@@ -24,7 +24,7 @@ import java.util.Map;
  * @version V0.1
  * @classNmae JWTTokenStoreConfig
  */
-@Configuration
+//@Configuration
 public class JWTTokenStoreConfig {
 
     @Autowired

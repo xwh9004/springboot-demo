@@ -11,6 +11,9 @@ eureka:
 signing:
   key: 345345fsdgsf5345
 
+
+
+
 #hystrix properties
 #hystrix:
 #  threadpool:
@@ -19,9 +22,9 @@ signing:
 
 
 
-#security:
-#  oauth2:
-#    client:
-#      grant-type: client_credentials
-#    resource:
-#      user-info-uri: http://localhost:8901/auth/user
+security:
+  oauth2:
+    client:
+      grant-type: client_credentials
+    resource:
+      user-info-uri: http://localhost:8901/auth/user
