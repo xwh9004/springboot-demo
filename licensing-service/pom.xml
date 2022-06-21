@@ -60,7 +60,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.16</version>
+            <version>8.0.28</version>
         </dependency>
         <!--引入Spring cloud Hystrix 为许可证服务提供断路器模式功能-->
         <dependency>
